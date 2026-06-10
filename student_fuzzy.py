@@ -266,4 +266,3 @@ else:
 
     df = pd.DataFrame(dataset, columns=['participation', 'assignments', 'exams', 'absences', 'performance'])
     df.to_csv('student_data.csv', index=False)
-
