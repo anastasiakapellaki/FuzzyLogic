@@ -5,12 +5,17 @@ import torch.nn as nn
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import random
 
+SEED = 42
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
 
 df = pd.read_csv("student_data.csv")
 
 X = df[["participation", "assignments", "exams", "absences"]].values
-y = df[["performance"]].values
+y = df[["performance"]].values 
 
 x_scaler = MinMaxScaler()
 y_scaler = MinMaxScaler()
@@ -71,7 +76,7 @@ class RuleAwareANFIS(nn.Module):
 
         self.centers = nn.Parameter(torch.tensor([
             [0.0, 0.5, 1.0],  # συμμετοχη
-            [0.0, 0.5, 1.0],  # εργασθες
+            [0.0, 0.5, 1.0],  # εργασιες
             [0.0, 0.5, 1.0],  # εξετασεις
             [0.0, 0.5, 1.0],  # απουσιες
         ], dtype=torch.float32))
